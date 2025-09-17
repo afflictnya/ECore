@@ -33,9 +33,7 @@ public class Webhook {
     }
 
     private String format(String s){
-        s = s.replace("\"", "");
-        if (s.endsWith("\\")) s += ".";
-        return s;
+        return s.replace("\"", "").replace("\\", "\\\\");
     }
 
     private String formatFields(ObjectMap<String, String> fields){
