@@ -29,6 +29,7 @@ public class PlayerData {
     public void save() {
         database.update(this.id, this.uuid, this.banned, this.rank, this.blockplaced, this.blockbroken, this.timeplayed,
                 this.messagesent, this.banneduntil);
+        Cache.set(uuid, this);
     }
     public void create(){
         database.add(this.uuid, this.banned, this.rank, this.blockplaced, this.blockbroken, this.timeplayed,

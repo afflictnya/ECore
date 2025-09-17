@@ -23,4 +23,7 @@ public class Cache {
     public static PlayerData remove(Player p) {
         return cache.remove(p.uuid());
     }
+    public static void set(String uuid, PlayerData data){
+        cache.put(uuid, data);
+    }
 }
