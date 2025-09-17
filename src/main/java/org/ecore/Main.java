@@ -8,10 +8,7 @@ import mindustry.gen.Groups;
 import mindustry.gen.Player;
 import mindustry.mod.Plugin;
 import org.ecore.commands.CommandManager;
-import org.ecore.commands.impl.AdminCommand;
-import org.ecore.commands.impl.JsCommand;
-import org.ecore.commands.impl.StatsCommand;
-import org.ecore.commands.impl.ToggleJsCommand;
+import org.ecore.commands.impl.*;
 import org.ecore.database.Cache;
 import org.ecore.database.Database;
 import org.ecore.database.PEvents;
@@ -37,7 +34,9 @@ public class Main extends Plugin {
                 new JsCommand(),
                 new AdminCommand(),
                 new StatsCommand(),
-                new ToggleJsCommand()
+                new ToggleJsCommand(),
+                new ToggleAddingCommand(),
+                new SqlCommand()
                 );
     }
 }

@@ -3,7 +3,7 @@ package org.ecore.database;
 import static org.ecore.PVars.*;
 public class PlayerData {
     public String uuid;
-    public String rank; // def, adding, js, ultra
+    public String rank = "def"; // def, adding, js, ultra
     public int id;
     public int blockplaced = 0;
     public int blockbroken = 0;
@@ -13,6 +13,7 @@ public class PlayerData {
     public boolean banned = false;
     public PlayerData(String uuid) {
         this.uuid = uuid;
+
     }
     public PlayerData(int id, String uuid, int blockplaced,int blockbroken,int timeplayed, int messagesent, int banneduntil,  boolean banned, String rank) {
         this.uuid = uuid;

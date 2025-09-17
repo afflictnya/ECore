@@ -25,9 +25,9 @@ public class PEvents {
         Timer.schedule(() -> Groups.player.each(player -> {
             var date = Cache.forceGet(player.uuid());
             if (date == null) return;
-            date.timeplayed+=60;
+            date.timeplayed+=25;
             date.save();
-        }),0, 60);
+        }),0, 25);
         Events.on(EventType.PlayerConnect.class, e -> {
             var data = Cache.forceGet(e.player.uuid());
             if (data.banned && data.banneduntil > Time.millis()) e.player.kick(Packets.KickReason.banned, 1);

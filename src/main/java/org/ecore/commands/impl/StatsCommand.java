@@ -53,10 +53,11 @@ public class StatsCommand extends AbstractCommand {
                     Times kicked: @
                     Banned: @
                     Banned until: @
+                    Rank: @
                     """,
                 data.uuid, sdata.lastIP, sdata.lastName, data.blockplaced, data.blockbroken,
                 data.messagesent, sdata.timesJoined, sdata.timesKicked, (data.banned || sdata.banned),
-                data.banneduntil
+                data.banneduntil, data.rank
         ));
     }
 }

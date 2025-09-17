@@ -48,7 +48,7 @@ public class Database {
     public void add(String uuid, boolean banned, String rank, long blockplaced,long blockbroken,long timeplayed,long messagesent,long banneduntil)  {
         try(PreparedStatement st = con.prepareStatement("""
                 INSERT INTO players(uuid,blockplaced,blockbroken,timeplayed,messagesent,banneduntil,banned,rank)
-                VALUES(?,?,?,?,?,?,?)
+                VALUES(?,?,?,?,?,?,?,?)
                 """)) {
                         st.setString(1, uuid);
             st.setLong(2, blockplaced);
