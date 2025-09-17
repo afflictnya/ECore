@@ -1,13 +1,16 @@
 package org.ecore.database;
 
 import arc.util.Log;
+import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 
 public class Database {
-    public static Connection con;
+
+    @Getter
+    private final Connection con;
     public Database(String path) throws SQLException, ClassNotFoundException, NoSuchMethodException, InvocationTargetException, InstantiationException, IllegalAccessException {
         Class.forName("org.sqlite.JDBC");
         con = DriverManager.getConnection("jdbc:sqlite:" + path);

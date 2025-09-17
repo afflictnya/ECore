@@ -1,16 +1,13 @@
 package org.ecore.commands.impl;
 
-import mindustry.gen.Groups;
 import mindustry.gen.Player;
 import org.ecore.PVars;
 import org.ecore.commands.AbstractCommand;
 import org.ecore.commands.CommandException;
 
-import java.util.Objects;
-
-public class ToggleJsCommand extends AbstractCommand {
-    public ToggleJsCommand(){
-        super("togglejs", "Выдать/забрать JS (по UUID)", "<uuid...>");
+public class ToggleAddingCommand extends AbstractCommand {
+    public ToggleAddingCommand(){
+        super("toggleadding", "huy chlen", "<uuid>");
         adminOnly = true;
         requiredRank = "ultra";
     }
@@ -19,9 +16,9 @@ public class ToggleJsCommand extends AbstractCommand {
     public void run(Player player, String[] args) throws CommandException {
         var data = PVars.database.getByUUID(args[0]);
         if (data == null) throw new CommandException("Cant find this player");
-        if (data.rank.equals("ultra")) throw new CommandException("player`s rank higher then js");
-        data.rank = (Objects.equals(data.rank, "js") ?"def":"js");
+        if (data.rank.equals("ultra") || data.rank.equals("js")) throw new CommandException("player`s rank higher then adding;");
+        data.rank = (data.rank.equals("adding")?"":"adding");
         data.save();
-        player.sendMessage("successfully updated.");
+        player.sendMessage("successfully edited rank");
     }
 }
