@@ -43,7 +43,8 @@ public class Main extends Plugin {
                 new SkipMapCommand(),
                 new SmvoteCommand(),
                 new BanCommand(),
-                new UnbanCommand()
+                new UnbanCommand(),
+                new PardonCommand()
                 );
     }
 }
