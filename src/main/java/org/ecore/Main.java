@@ -42,7 +42,8 @@ public class Main extends Plugin {
                 new SqlCommand(),
                 new SkipMapCommand(),
                 new SmvoteCommand(),
-                new BanCommand()
+                new BanCommand(),
+                new UnbanCommand()
                 );
     }
 }
