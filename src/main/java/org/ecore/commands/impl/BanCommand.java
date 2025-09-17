@@ -23,7 +23,6 @@ public class BanCommand extends AbstractCommand {
     @Override
     public void run(Player player, String[] args) throws CommandException {
         String text = args[0];
-        if (!Strings.canParseInt(args[1])) throw new CommandException("2nd arg must be int");
         long unbanTimestamp = Time.millis() + Utils.toMillis(args[1]);
         PlayerData data;
         if (text.length() == 24 && text.endsWith("==")) {
