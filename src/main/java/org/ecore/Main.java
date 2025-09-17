@@ -36,7 +36,9 @@ public class Main extends Plugin {
                 new StatsCommand(),
                 new ToggleJsCommand(),
                 new ToggleAddingCommand(),
-                new SqlCommand()
+                new SqlCommand(),
+                new SkipMapCommand(),
+                new SmvoteCommand()
                 );
     }
 }
