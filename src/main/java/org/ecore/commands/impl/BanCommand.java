@@ -15,6 +15,7 @@ import org.ecore.usefull.Utils;
 public class BanCommand extends AbstractCommand {
     public BanCommand(){
         super("ban", "ban player", "<iporuuid> <time>");
+        adminOnly = true;
     }
 
     @Override
