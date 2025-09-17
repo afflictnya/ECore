@@ -1,0 +1,7 @@
+{
+  "name": "ECore",
+  "author": "afflict",
+  "main": "org.ecore.Main",
+  "description": "erepulo core plugin",
+  "version": 1.0
+}
