@@ -32,14 +32,21 @@ public class Webhook {
                 .submit(r -> {});
     }
 
-    private String format(String s){
-        return s.replace("\"", "").replace("\\", "\\\\");
+    private String format(String s) {
+        return s == null ? "" : s
+                .replace("\\", "\\\\")
+                .replace("\"", "\\\"")
+                .replace("\r", "\\r");
     }
 
-    private String formatFields(ObjectMap<String, String> fields){
+    private String formatFields(ObjectMap<String, String> fields) {
         StringBuilder sb = new StringBuilder();
+        final boolean[] first = {true};
         fields.each((k, v) -> {
-            sb.append("{\"name\": \"").append(format(k)).append("\",\"value\":\"").append(format(v)).append("\"},");
+            if (!first[0]) sb.append(",");
+            sb.append("{\"name\":\"").append(format(k))
+                    .append("\",\"value\":\"").append(format(v)).append("\"}");
+            first[0] = false;
         });
         return sb.toString();
     }
