@@ -41,7 +41,7 @@ public class BanCommand extends AbstractCommand {
         if (target != null) target.kick(Packets.KickReason.banned);
         Webhooks.bans.sendEmbed("Ban", 14177041, Utils.apply(ObjectMap.of(
                 "UUID", data.uuid,
-                "ID", data.id,
+                "ID", String.valueOf(data.id),
                 "Admin", player.plainName(),
                 "Unban time", Utils.formatTime(unbanTimestamp)
         ), m -> {

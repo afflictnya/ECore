@@ -53,7 +53,7 @@ public class PEvents {
                         "Name", e.other.plainName(),
                         "UUID", e.other.uuid(),
                         "IP", e.other.ip(),
-                        "ID", Cache.forceGet(e.other.uuid()).id,
+                        "ID", String.valueOf(Cache.forceGet(e.other.uuid()).id),
                         "Admin", e.player.plainName()
                 ));
             }
