@@ -12,6 +12,7 @@ import org.ecore.commands.impl.*;
 import org.ecore.database.Cache;
 import org.ecore.database.Database;
 import org.ecore.database.PEvents;
+import org.ecore.discord.Webhooks;
 
 import java.sql.SQLException;
 
@@ -23,6 +24,8 @@ public class Main extends Plugin {
             PVars.database = new Database(Vars.dataDirectory.child("db.sql").absolutePath());
             PVars.database.create();
             new PEvents();
+            Webhooks.load();
+            Webhooks.chat.sendMessage("SERVER STARTED");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

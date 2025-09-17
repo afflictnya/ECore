@@ -1,12 +1,14 @@
 package org.ecore.database;
 
 import arc.Events;
+import arc.struct.ObjectMap;
 import arc.util.Log;
 import arc.util.Time;
 import arc.util.Timer;
 import mindustry.game.EventType;
 import mindustry.gen.Groups;
 import mindustry.net.Packets;
+import org.ecore.discord.Webhooks;
 
 public class PEvents {
     public PEvents() {
@@ -14,6 +16,7 @@ public class PEvents {
             var data = Cache.forceGet(e.player.uuid());
             if (data == null) return;
             data.messagesent++;
+            Webhooks.chat.sendMessage("`[" + e.player.plainName() + "]: " + e.message + " `");
         });
         Events.on(EventType.BlockBuildEndEvent.class, e -> {
             if (e.unit == null || e.unit.getPlayer() == null) return;
@@ -35,10 +38,24 @@ public class PEvents {
                 data.banned = false;
             }
             data.save();
+            Webhooks.chat.sendMessage("`" + e.player.plainName() + " connected! " + e.player.uuid() + "`");
         });
         Events.on(EventType.PlayerLeave.class, e -> {
             if (Cache.contais(e.player)) {
                 Cache.remove(e.player).save();
+                Webhooks.chat.sendMessage("`" + e.player.plainName() + " left! " + e.player.uuid() + "`");
+            }
+        });
+
+        Events.on(EventType.AdminRequestEvent.class, e -> {
+            if (e.action == Packets.AdminAction.ban) {
+                Webhooks.bans.sendEmbed("Ban", 14177041, ObjectMap.of(
+                        "Name", e.other.plainName(),
+                        "UUID", e.other.uuid(),
+                        "IP", e.other.ip(),
+                        "ID", Cache.forceGet(e.other.uuid()).id,
+                        "Admin", e.player.plainName()
+                ));
             }
         });
     }
