@@ -33,7 +33,7 @@ public class Webhook {
     }
 
     private String format(String s){
-        s = s.replace("\"", "").replace("`", "");
+        s = s.replace("\"", "");
         if (s.endsWith("\\")) s += ".";
         return s;
     }

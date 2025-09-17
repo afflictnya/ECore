@@ -16,7 +16,7 @@ public class PEvents {
             var data = Cache.forceGet(e.player.uuid());
             if (data == null) return;
             data.messagesent++;
-            Webhooks.chat.sendMessage("`[" + e.player.plainName() + "]: " + e.message + " `");
+            Webhooks.chat.sendMessage("`[" + e.player.plainName().replace("`", "") + "]: " + e.message.replace("`", "") + " `");
         });
         Events.on(EventType.BlockBuildEndEvent.class, e -> {
             if (e.unit == null || e.unit.getPlayer() == null) return;
@@ -38,12 +38,12 @@ public class PEvents {
                 data.banned = false;
             }
             data.save();
-            Webhooks.chat.sendMessage("`" + e.player.plainName() + " connected! " + e.player.uuid() + "`");
+            Webhooks.chat.sendMessage("`" + e.player.plainName().replace("`", "") + " connected! " + e.player.uuid() + "`");
         });
         Events.on(EventType.PlayerLeave.class, e -> {
             if (Cache.contais(e.player)) {
                 Cache.remove(e.player).save();
-                Webhooks.chat.sendMessage("`" + e.player.plainName() + " left! " + e.player.uuid() + "`");
+                Webhooks.chat.sendMessage("`" + e.player.plainName().replace("`", "") + " left! " + e.player.uuid() + "`");
             }
         });
 

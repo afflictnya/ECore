@@ -9,7 +9,7 @@ import static org.ecore.usefull.SkipMapVoteSession.currentlyMapSkipping;
 
 public class SmvoteCommand extends AbstractCommand {
     public SmvoteCommand(){
-        super("smvote", "<y/n>", "Проголосовать за/против пропуск карты");
+        super("smvote", "Проголосовать за/против пропуск карты", "<y/n>");
     }
 
     @Override
