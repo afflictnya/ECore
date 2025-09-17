@@ -35,8 +35,8 @@ public class SqlCommand extends AbstractCommand {
 
         try {
             return mapper.writerWithDefaultPrettyPrinter().writeValueAsString(list);
-        } catch (Exception e) {
-            throw new RuntimeException("Ошибка при сериализации в JSON", e);
+        } catch (Exception ignored) {
+            return "";
         }
     }
 
