@@ -1,5 +1,7 @@
 package org.ecore.usefull;
 
+import arc.func.Cons;
+
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -29,5 +31,9 @@ public class Utils {
             case "s", "с" -> value;
             default -> -1;
         } * 1000;
+    }
+    public static <T> T apply(T obj, Cons<T> func){
+        func.get(obj);
+        return obj;
     }
 }

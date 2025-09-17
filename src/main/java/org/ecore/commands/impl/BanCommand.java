@@ -3,8 +3,11 @@ package org.ecore.commands.impl;
 import arc.struct.ObjectMap;
 import arc.util.Strings;
 import arc.util.Time;
+import jdk.jshell.execution.Util;
 import mindustry.Vars;
+import mindustry.gen.Groups;
 import mindustry.gen.Player;
+import mindustry.net.Packets;
 import org.ecore.commands.AbstractCommand;
 import org.ecore.commands.CommandException;
 import org.ecore.database.Cache;
@@ -36,12 +39,18 @@ public class BanCommand extends AbstractCommand {
         data.banned = true;
         data.banneduntil = unbanTimestamp;
         data.save();
-        Webhooks.bans.sendEmbed("Ban", 14177041, ObjectMap.of(
+        Player target = Groups.player.find(p -> p.uuid().equals(data.uuid));
+        if (target != null) target.kick(Packets.KickReason.banned);
+        Webhooks.bans.sendEmbed("Ban", 14177041, Utils.apply(ObjectMap.of(
                 "UUID", data.uuid,
                 "ID", data.id,
                 "Admin", player.plainName(),
                 "Unban time", Utils.formatTime(unbanTimestamp)
-        ));
+        ), m -> {
+            if (target != null){
+                m.put("Name", target.plainName());
+            }
+        }));
         player.sendMessage("successfully banned " + data.id);
     }
 }
