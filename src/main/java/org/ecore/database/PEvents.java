@@ -42,7 +42,7 @@ public class PEvents {
         });
         Events.on(EventType.PlayerLeave.class, e -> {
             if (Cache.contais(e.player)) {
-                Cache.remove(e.player).save();
+                Cache.remove(e.player).saveh();
                 Webhooks.chat.sendMessage("`" + e.player.plainName().replace("`", "") + " left! " + e.player.uuid() + "`");
             }
         });
