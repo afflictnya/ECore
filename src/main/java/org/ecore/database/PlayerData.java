@@ -36,4 +36,8 @@ public class PlayerData {
                 this.messagesent, this.banneduntil);
 
     }
+    public void saveh() {
+        database.update(this.id, this.uuid, this.banned, this.rank, this.blockplaced, this.blockbroken, this.timeplayed,
+                this.messagesent, this.banneduntil);
+    }
 }
