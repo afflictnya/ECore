@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 public abstract class DiscordCommand {
     public String name;
     public String description;
-    public Seq<OptionData> options;
+    public Seq<OptionData> options = new Seq<>();
 
     public Seq<Long> allowedRoles = new Seq<>();
     public DiscordCommand(String name, String desc){
