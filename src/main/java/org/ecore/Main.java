@@ -1,31 +1,26 @@
 package org.ecore;
 
+import arc.files.Fi;
 import arc.util.CommandHandler;
 import arc.util.Log;
-import arc.util.Time;
 import mindustry.Vars;
-import mindustry.gen.Groups;
-import mindustry.gen.Player;
 import mindustry.mod.Plugin;
 import org.ecore.commands.CommandManager;
 import org.ecore.commands.impl.*;
-import org.ecore.database.Cache;
 import org.ecore.database.Database;
 import org.ecore.database.PEvents;
-import org.ecore.discord.Webhooks;
+import org.ecore.discord.Bot;
 
-import java.sql.SQLException;
 
 public class Main extends Plugin {
     @Override
     public void init(){
         Log.info("&lm[ECORE]:&lw loaded.");
         try {
+            Bot.load(new Fi("./token.txt").readString());
             PVars.database = new Database(Vars.dataDirectory.child("db.sql").absolutePath());
             PVars.database.create();
             new PEvents();
-            Webhooks.load();
-            Webhooks.chat.sendMessage("SERVER STARTED");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -39,7 +34,6 @@ public class Main extends Plugin {
                 new StatsCommand(),
                 new ToggleJsCommand(),
                 new ToggleAddingCommand(),
-                new SqlCommand(),
                 new SkipMapCommand(),
                 new SmvoteCommand(),
                 new BanCommand(),

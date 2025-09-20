@@ -36,4 +36,9 @@ public class Utils {
         func.get(obj);
         return obj;
     }
+
+    public static String d(String s){
+        if (s.length() < 2000) return s;
+        return s.substring(0, 1999);
+    }
 }

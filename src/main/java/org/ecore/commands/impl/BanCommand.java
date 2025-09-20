@@ -7,12 +7,15 @@ import mindustry.Vars;
 import mindustry.gen.Groups;
 import mindustry.gen.Player;
 import mindustry.net.Packets;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.ecore.commands.AbstractCommand;
 import org.ecore.commands.CommandException;
 import org.ecore.database.Cache;
 import org.ecore.database.PlayerData;
-import org.ecore.discord.Webhooks;
+import org.ecore.discord.Bot;
 import org.ecore.usefull.Utils;
+
+import java.util.Optional;
 
 public class BanCommand extends AbstractCommand {
     public BanCommand(){
@@ -39,16 +42,17 @@ public class BanCommand extends AbstractCommand {
         data.save();
         Player target = Groups.player.find(p -> p.uuid().equals(data.uuid));
         if (target != null) target.kick(Packets.KickReason.banned);
-        Webhooks.bans.sendEmbed("Ban", 14177041, Utils.apply(ObjectMap.of(
-                "UUID", data.uuid,
-                "ID", String.valueOf(data.id),
-                "Admin", player.plainName(),
-                "Unban time", Utils.formatTime(unbanTimestamp)
-        ), m -> {
-            if (target != null){
-                m.put("Name", target.plainName());
-            }
-        }));
+        Bot.sendBan(
+                new EmbedBuilder()
+                        .setColor(0xff0000)
+                        .setTitle("Ban")
+                        .addField("UUID", data.uuid, false)
+                        .addField("ID", String.valueOf(data.id), false)
+                        .addField("Name", Optional.ofNullable(target).map(Player::plainName).orElse("???"), false)
+                        .addField("Admin", player.plainName(), false)
+                        .addField("Unban time", Utils.formatTime(unbanTimestamp), false)
+        );
+
         player.sendMessage("successfully banned " + data.id);
     }
 }
