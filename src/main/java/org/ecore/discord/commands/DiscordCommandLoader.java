@@ -13,7 +13,7 @@ import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import java.awt.*;
 
 public class DiscordCommandLoader {
-    protected static Seq<DiscordCommand> allCommands;
+    protected static Seq<DiscordCommand> allCommands = new Seq<>();
     public static void loadCommands(JDA jda, DiscordCommand... commands){
         CommandListUpdateAction updater = jda.updateCommands();
         for (var cmd : commands){

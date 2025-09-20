@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.session.ReadyEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.ecore.discord.commands.DiscordCommandLoader;
@@ -19,18 +20,12 @@ public class Bot extends ListenerAdapter {
     protected static TextChannel bans;
     protected static TextChannel logs;
     public static void load(String token){
-        jda = JDABuilder.createLight(token, EnumSet.noneOf(GatewayIntent.class))
+        jda = JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class))
                 .addEventListeners(new Bot())
-                .build();
+                .build()
+        ;
 
-        long channelId = (long) Core.settings.get("logs", 1344529439614042183L);
-        if(jda.getChannelById(TextChannel.class, channelId) != null) {
-            logs = jda.getChannelById(TextChannel.class, channelId);
-        }
-        channelId = (long)Core.settings.get("bans", 1344532704422658088L);
-        if(jda.getChannelById(TextChannel.class, channelId) != null) {
-            bans = jda.getChannelById(TextChannel.class, channelId);
-        }
+
         DiscordCommandLoader.loadCommands(jda,
                 new BanDiscord(),
                 new UnbanDiscord(),
@@ -40,6 +35,13 @@ public class Bot extends ListenerAdapter {
         );
     }
 
+    @Override
+    public void onReady(@NotNull ReadyEvent e){
+        long channelId = Core.settings.getLong("logs", 1344529439614042183L);
+        logs = jda.getChannelById(TextChannel.class, channelId);
+        channelId = Core.settings.getLong("bans", 1344532704422658088L);
+        bans = jda.getChannelById(TextChannel.class, channelId);
+    }
     @Override
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event){
         DiscordCommandLoader.handleInteraction(event);
