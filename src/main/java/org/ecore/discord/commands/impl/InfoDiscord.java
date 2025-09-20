@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.ecore.PVars;
 import org.ecore.commands.CommandException;
+import org.ecore.database.Cache;
 import org.ecore.database.PlayerData;
 import org.ecore.discord.commands.DiscordCommand;
 import org.ecore.discord.commands.DiscordCommandEx;
@@ -43,7 +44,7 @@ public class InfoDiscord extends DiscordCommand {
             var set = Vars.netServer.admins.findByName(text);
             if (set.isEmpty()) throw new DiscordCommandEx("Can`t find this player!");
             var sdata = set.first();
-            var data = PVars.database.getByUUID(sdata.id);
+            var data = Cache.forceGet(sdata.id);
             sendInfo(event, data, sdata);
         }
     }
@@ -51,6 +52,7 @@ public class InfoDiscord extends DiscordCommand {
     private void sendInfo(SlashCommandInteractionEvent event, PlayerData data, Administration.PlayerInfo sdata) {
         event.reply(Utils.d(Strings.format("""
                     UUID: @
+                    ID: @
                     IPs: @
                     Names: @
                     placed: @
@@ -62,7 +64,7 @@ public class InfoDiscord extends DiscordCommand {
                     Banned until: @
                     Rank: @
                     """,
-                data.uuid, sdata.ips.toString(" "), sdata.names.toString(" "), data.blockplaced, data.blockbroken,
+                data.uuid, data.id, sdata.ips.toString(" "), sdata.names.toString(" "), data.blockplaced, data.blockbroken,
                 data.messagesent, sdata.timesJoined, sdata.timesKicked, (data.banned || sdata.banned),
                 data.banneduntil, data.rank
         ))).setEphemeral(true).queue();

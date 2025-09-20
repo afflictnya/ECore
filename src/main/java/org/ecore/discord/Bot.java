@@ -22,8 +22,7 @@ public class Bot extends ListenerAdapter {
     public static void load(String token){
         jda = JDABuilder.createLight(token, EnumSet.allOf(GatewayIntent.class))
                 .addEventListeners(new Bot())
-                .build()
-        ;
+                .build();
 
 
         DiscordCommandLoader.loadCommands(jda,

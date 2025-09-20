@@ -27,7 +27,7 @@ public class FindDiscord extends DiscordCommand {
         ObjectSet<Administration.PlayerInfo> infos = Vars.netServer.admins.searchNames(name);
         StringBuilder out = new StringBuilder("```Empty.");
         if(infos.size > 0){
-            out = new StringBuilder("```Players found: " + infos.size);
+            out = new StringBuilder("```Players found: " + infos.size + "\n");
             int i = 0;
             for(Administration.PlayerInfo info : infos){
                 out.append("- [")
@@ -35,7 +35,7 @@ public class FindDiscord extends DiscordCommand {
                    .append("] '")
                    .append(info.plainLastName())
                    .append("' / ")
-                   .append(info.id);
+                   .append(info.id).append("\n");
             }
         }
         event.reply(out + "```").setEphemeral(true).queue();

@@ -92,6 +92,7 @@ public class Database {
     private PlayerData get(Param pname, Object val)  {
        try(PreparedStatement statement = con.prepareStatement("SELECT * FROM players WHERE " + pname.name() + "=?", ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY,ResultSet.CLOSE_CURSORS_AT_COMMIT)) {
            if (val instanceof String s) statement.setString(1, s);
+           else if (val instanceof Integer i) statement.setInt(1, i);
            else statement.setLong(1, (long) val);
            var resp = statement.executeQuery();
            if (!resp.next()) return null;
