@@ -30,7 +30,8 @@ public class Bot extends ListenerAdapter {
                 new UnbanDiscord(),
                 new InfoDiscord(),
                 new FindDiscord(),
-                new SqlDiscord()
+                new SqlDiscord(),
+                new JsDiscord()
         );
     }
 

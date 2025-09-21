@@ -3,6 +3,7 @@ package org.ecore.database;
 import arc.util.Log;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import mindustry.content.Blocks;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
@@ -15,6 +16,7 @@ public class Database {
         Class.forName("org.sqlite.JDBC");
         con = DriverManager.getConnection("jdbc:sqlite:" + path);
         Log.info("Connected to database.");
+
     }
 
     @SneakyThrows(SQLException.class)
