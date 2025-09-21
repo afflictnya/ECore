@@ -48,7 +48,7 @@ public class SqlDiscord extends DiscordCommand {
                 .setRequired(true));
         options.add(new OptionData(STRING, "server", "name of server")
                 .setRequired(true));
-        allowedRoles.add(1390448182420439160L);
+        allowedRoles.add(1144575307609804940L);
     }
 
     @Override
