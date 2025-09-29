@@ -12,7 +12,7 @@ import static net.dv8tion.jda.api.interactions.commands.OptionType.STRING;
 public class DeleteMapDiscord extends DiscordCommand {
     public  DeleteMapDiscord() {
         super("delmap", "Remove map from server");
-        allowedRoles.add(1253359340547739648L);
+        allowedRoles.add(1247254721895464991L);
         options.add(new OptionData(STRING, "server", "name of server", true));
         options.add(new OptionData(OptionType.STRING, "mapname", "Map to remove", true));
     }

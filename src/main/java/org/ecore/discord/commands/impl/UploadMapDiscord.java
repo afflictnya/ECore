@@ -14,7 +14,7 @@ public class UploadMapDiscord extends DiscordCommand {
 
     public  UploadMapDiscord() {
         super("uploadmap", "Uploads a map to server");
-        allowedRoles.add(1253359340547739648L);
+        allowedRoles.add(1247254721895464991L);
         options.add(new OptionData(OptionType.ATTACHMENT, "file", "the map to be uploaded", true));
         options.add(new OptionData(STRING, "server", "name of server", true));
     }

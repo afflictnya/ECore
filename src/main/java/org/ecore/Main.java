@@ -26,7 +26,6 @@ public class Main extends Plugin {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
     }
     @Override
     public void registerClientCommands(CommandHandler handler) {
