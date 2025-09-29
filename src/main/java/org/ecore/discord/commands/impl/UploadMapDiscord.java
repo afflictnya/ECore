@@ -9,6 +9,8 @@ import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.ecore.discord.commands.DiscordCommand;
 import org.ecore.discord.commands.DiscordCommandEx;
 
+import static net.dv8tion.jda.api.interactions.commands.OptionType.STRING;
+
 public class UploadMapDiscord extends DiscordCommand {
 
     private static final byte[] header = {'M', 'S', 'A', 'V'};
@@ -16,6 +18,7 @@ public class UploadMapDiscord extends DiscordCommand {
         super("uploadmap", "Uploads a map to server");
         allowedRoles.add(1253359340547739648L);
         options.add(new OptionData(OptionType.ATTACHMENT, "file", "the map to be uploaded", true));
+        options.add(new OptionData(STRING, "server", "name of server", true));
     }
 
     @Override

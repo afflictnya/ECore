@@ -11,9 +11,12 @@ import org.ecore.discord.commands.DiscordCommandEx;
 
 import java.awt.*;
 
+import static net.dv8tion.jda.api.interactions.commands.OptionType.STRING;
+
 public class JsDiscord extends DiscordCommand {
     public JsDiscord() {
         super("js", "Execute JavaScript code on server.");
+        options.add(new OptionData(STRING, "server", "name of server", true));
         options.add(new OptionData(OptionType.STRING, "code", "JS code", true));
         allowedRoles.add(1144575307609804940L);
     }
