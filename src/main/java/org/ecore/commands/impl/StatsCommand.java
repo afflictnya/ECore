@@ -16,11 +16,14 @@ import static java.lang.Integer.parseInt;
 public class StatsCommand extends AbstractCommand {
     public StatsCommand(){
         super("stats", "See player stats", "<idoruuidorname...>");
-        this.adminOnly = true;
     }
 
     @Override
     public void run(Player player, String[] args) throws CommandException {
+        if (!player.admin) {
+            sendInfo(player, Cache.forceGet(player.uuid()), Vars.netServer.admins.getInfo(player.uuid()));
+            return;
+        }
         String text = args[0];
         if (Strings.canParseInt(text)) {
             PlayerData data = PVars.database.getByID(parseInt(text));
