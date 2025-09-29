@@ -37,6 +37,6 @@ public class RemoveAdminDiscord extends DiscordCommand {
                 d.save();
             }
         } else throw new DiscordCommandEx("Invalid input");
-        event.reply("successfully removed admin");
+        event.reply("successfully removed admin").queue();
     }
 }
