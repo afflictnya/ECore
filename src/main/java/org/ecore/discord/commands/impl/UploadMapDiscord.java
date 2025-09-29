@@ -1,7 +1,6 @@
 package org.ecore.discord.commands.impl;
 
 import arc.util.Http;
-import arc.util.Threads;
 import mindustry.Vars;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -13,7 +12,6 @@ import static net.dv8tion.jda.api.interactions.commands.OptionType.STRING;
 
 public class UploadMapDiscord extends DiscordCommand {
 
-    private static final byte[] header = {'M', 'S', 'A', 'V'};
     public  UploadMapDiscord() {
         super("uploadmap", "Uploads a map to server");
         allowedRoles.add(1253359340547739648L);
@@ -29,18 +27,7 @@ public class UploadMapDiscord extends DiscordCommand {
         Http.get(attachment.getUrl())
                 .error(err -> event.getHook().sendMessage(err.getMessage()).queue())
                 .submit(resp -> {
-                    byte[] result = resp.getResult();
-                    if (result.length <= header.length) {
-                        event.getHook().sendMessage("Invalid or corrupted map file").queue();
-                        return;
-                    }
-                    for (int i = 0; i < header.length; i++){
-                        if (result[i] != header[i]) {
-                            event.getHook().sendMessage("Invalid or corrupted map file").queue();
-                            return;
-                        }
-                    }
-                    Vars.customMapDirectory.child(attachment.getFileName()).writeBytes(result);
+                    Vars.customMapDirectory.child(attachment.getFileName()).writeBytes(resp.getResult());
                     Vars.maps.reload();
                     event.getHook().sendMessage("Successfully uploaded map " + attachment.getFileName()).queue();
                 });
