@@ -61,7 +61,6 @@ public class SqlDiscord extends DiscordCommand {
         try(Statement stmt = PVars.database.getCon().createStatement()) {
             if (stmt.execute(event.getOption("query").getAsString())) {
                 event.reply(rsToJson(stmt.getResultSet()))
-                     .setEphemeral(true)
                      .queue();
             } else  {
                 throw new DiscordCommandEx("Query does not return results");
