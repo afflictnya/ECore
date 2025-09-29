@@ -10,6 +10,7 @@ import org.ecore.commands.impl.*;
 import org.ecore.database.Database;
 import org.ecore.database.PEvents;
 import org.ecore.discord.Bot;
+import org.ecore.usefull.ExploitFixer;
 
 
 public class Main extends Plugin {
@@ -21,6 +22,7 @@ public class Main extends Plugin {
             PVars.database = new Database(Vars.dataDirectory.child("db.sql").absolutePath());
             PVars.database.create();
             new PEvents();
+            ExploitFixer.setup();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
