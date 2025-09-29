@@ -47,6 +47,7 @@ public class StatsCommand extends AbstractCommand {
     private void sendInfo(Player req, PlayerData data, Administration.PlayerInfo sdata) {
         req.sendMessage(Strings.format("""
                     UUID: @
+                    ID: @
                     IP: @
                     Name: @
                     Blocks placed: @
@@ -58,7 +59,7 @@ public class StatsCommand extends AbstractCommand {
                     Banned until: @
                     Rank: @
                     """,
-                data.uuid, sdata.lastIP, sdata.lastName, data.blockplaced, data.blockbroken,
+                data.uuid, data.id, sdata.lastIP, sdata.lastName, data.blockplaced, data.blockbroken,
                 data.messagesent, sdata.timesJoined, sdata.timesKicked, (data.banned || sdata.banned),
                 data.banneduntil, data.rank
         ));

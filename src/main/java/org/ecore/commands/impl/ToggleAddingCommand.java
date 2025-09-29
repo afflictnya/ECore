@@ -4,6 +4,7 @@ import mindustry.gen.Player;
 import org.ecore.PVars;
 import org.ecore.commands.AbstractCommand;
 import org.ecore.commands.CommandException;
+import org.ecore.discord.Bot;
 
 public class ToggleAddingCommand extends AbstractCommand {
     public ToggleAddingCommand(){
@@ -20,5 +21,6 @@ public class ToggleAddingCommand extends AbstractCommand {
         data.rank = (data.rank.equals("adding")?"":"adding");
         data.save();
         player.sendMessage("successfully edited rank");
+        Bot.importantLog(player.plainName() + "(" + player.uuid() + ") changed " + data.uuid + " (" + data.id +")'s rank to " + data.rank);
     }
 }

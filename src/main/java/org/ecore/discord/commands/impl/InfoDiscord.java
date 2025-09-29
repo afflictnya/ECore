@@ -2,12 +2,10 @@ package org.ecore.discord.commands.impl;
 
 import arc.util.Strings;
 import mindustry.Vars;
-import mindustry.gen.Player;
 import mindustry.net.Administration;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.ecore.PVars;
-import org.ecore.commands.CommandException;
 import org.ecore.database.Cache;
 import org.ecore.database.PlayerData;
 import org.ecore.discord.commands.DiscordCommand;

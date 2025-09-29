@@ -1,10 +1,15 @@
 package org.ecore.usefull;
 
 import arc.func.Cons;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,5 +45,17 @@ public class Utils {
     public static String d(String s){
         if (s.length() < 2000) return s;
         return s.substring(0, 1999);
+    }
+    private static Collection<String> chunk(String str, int size) {
+        ArrayList<String> split = new ArrayList<>();
+        for (int start = 0; start < str.length(); start += size) {
+            split.add(str.substring(start, Math.min(start + size, str.length())));
+        }
+        return split;
+    }
+    public static void sendLongMessage(TextChannel channel, String longText){
+        for (String s : chunk(longText, 1984)) {
+            channel.sendMessage(s).queue();
+        }
     }
 }

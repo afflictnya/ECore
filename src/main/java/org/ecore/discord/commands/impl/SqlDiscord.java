@@ -3,20 +3,21 @@ package org.ecore.discord.commands.impl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.ecore.PVars;
 import org.ecore.commands.CommandException;
+import org.ecore.database.Cache;
 import org.ecore.discord.commands.DiscordCommand;
 import org.ecore.discord.commands.DiscordCommandEx;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Statement;
+import java.util.*;
 
+import static net.dv8tion.jda.api.interactions.commands.OptionType.BOOLEAN;
 import static net.dv8tion.jda.api.interactions.commands.OptionType.STRING;
 
 public class SqlDiscord extends DiscordCommand {
@@ -48,13 +49,23 @@ public class SqlDiscord extends DiscordCommand {
                 .setRequired(true));
         options.add(new OptionData(STRING, "server", "name of server")
                 .setRequired(true));
+
+        options.add(new OptionData(BOOLEAN, "clearcache", "clear cache or not.", false));
+
         allowedRoles.add(1144575307609804940L);
     }
 
     @Override
     public void run(SlashCommandInteractionEvent event) throws DiscordCommandEx {
-        try(PreparedStatement stmt = PVars.database.getCon().prepareStatement(event.getOption("query").getAsString())) {
-            event.reply(rsToJson(stmt.executeQuery())).setEphemeral(true).queue();
+        if (Optional.ofNullable(event.getOption("clearcache")).map(OptionMapping::getAsBoolean).orElse(false)) Cache.clear();
+        try(Statement stmt = PVars.database.getCon().createStatement()) {
+            if (stmt.execute(event.getOption("query").getAsString())) {
+                event.reply(rsToJson(stmt.getResultSet()))
+                     .setEphemeral(true)
+                     .queue();
+            } else  {
+                throw new DiscordCommandEx("Query does not return results");
+            }
         } catch (Exception e) {
             throw new DiscordCommandEx(e.getMessage());
         }

@@ -5,6 +5,7 @@ import mindustry.gen.Player;
 import org.ecore.PVars;
 import org.ecore.commands.AbstractCommand;
 import org.ecore.commands.CommandException;
+import org.ecore.discord.Bot;
 
 import java.util.Objects;
 
@@ -23,5 +24,6 @@ public class ToggleJsCommand extends AbstractCommand {
         data.rank = (Objects.equals(data.rank, "js") ?"def":"js");
         data.save();
         player.sendMessage("successfully updated.");
+        Bot.importantLog(player.plainName() + "(" + player.uuid() + ") changed " + data.uuid + " (" + data.id +")'s rank to " + data.rank);
     }
 }

@@ -26,4 +26,7 @@ public class Cache {
     public static void set(String uuid, PlayerData data){
         cache.put(uuid, data);
     }
+    public static void clear(){
+        cache.clear();
+    }
 }

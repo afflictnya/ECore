@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.ecore.discord.Bot;
 import org.ecore.discord.commands.DiscordCommand;
 import org.ecore.discord.commands.DiscordCommandEx;
 
@@ -25,7 +26,9 @@ public class JsDiscord extends DiscordCommand {
     public void run(SlashCommandInteractionEvent event) throws DiscordCommandEx {
         try {
             Core.app.post(()->{
-                String resp = Vars.mods.getScripts().runConsole(event.getOption("code").getAsString());
+                String code = event.getOption("code").getAsString();
+                Bot.sendJsLog(event.getUser().getName(), code);
+                String resp = Vars.mods.getScripts().runConsole(code);
                 event.replyEmbeds(
                         new EmbedBuilder().setColor(Color.MAGENTA).setTitle("JS").setDescription(resp).build()
                 ).queue();
