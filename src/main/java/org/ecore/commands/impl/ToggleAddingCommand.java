@@ -18,7 +18,7 @@ public class ToggleAddingCommand extends AbstractCommand {
         var data = PVars.database.getByUUID(args[0]);
         if (data == null) throw new CommandException("Cant find this player");
         if (data.rank.equals("ultra") || data.rank.equals("js")) throw new CommandException("player`s rank higher then adding;");
-        data.rank = (data.rank.equals("adding")?"":"adding");
+        data.rank = (data.rank.equals("adding")?"def":"adding");
         data.save();
         player.sendMessage("successfully edited rank");
         Bot.importantLog(player.plainName() + "(" + player.uuid() + ") changed " + data.uuid + " (" + data.id +")'s rank to " + data.rank);
