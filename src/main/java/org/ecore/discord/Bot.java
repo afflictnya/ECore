@@ -42,7 +42,8 @@ public class Bot extends ListenerAdapter {
                 new UploadMapDiscord(),
                 new DeleteMapDiscord(),
                 new MapListDiscord(),
-                new RemoveAdminDiscord()
+                new RemoveAdminDiscord(),
+                new PardonIpCommand()
         );
     }
 
