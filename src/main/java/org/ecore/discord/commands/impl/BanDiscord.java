@@ -71,6 +71,8 @@ public class BanDiscord extends DiscordCommand {
             );
         } else if (ipPattern.matcher(id).matches()){
             Vars.netServer.admins.banPlayerIP(id);
+            Player target = Groups.player.find(p -> p.ip().equals(id));
+            if (target != null) target.kick(Packets.KickReason.banned);
             event.replyEmbeds(
                     new EmbedBuilder()
                             .setColor(Color.GREEN)
