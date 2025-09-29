@@ -19,7 +19,7 @@ public class JsDiscord extends DiscordCommand {
         super("js", "Execute JavaScript code on server.");
         options.add(new OptionData(STRING, "server", "name of server", true));
         options.add(new OptionData(OptionType.STRING, "code", "JS code", true));
-        allowedRoles.add(1144575307609804940L);
+        allowedRoles.add(1334077137413734461L);
     }
 
     @Override
