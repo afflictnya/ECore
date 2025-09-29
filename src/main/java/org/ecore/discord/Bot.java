@@ -32,7 +32,9 @@ public class Bot extends ListenerAdapter {
                 new FindDiscord(),
                 new SqlDiscord(),
                 new JsDiscord(),
-                new UploadMapDiscord()
+                new UploadMapDiscord(),
+                new DeleteMapDiscord(),
+                new MapListDiscord()
         );
     }
 
