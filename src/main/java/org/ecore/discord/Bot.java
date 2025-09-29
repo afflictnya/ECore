@@ -41,7 +41,8 @@ public class Bot extends ListenerAdapter {
                 new JsDiscord(),
                 new UploadMapDiscord(),
                 new DeleteMapDiscord(),
-                new MapListDiscord()
+                new MapListDiscord(),
+                new RemoveAdminDiscord()
         );
     }
 
